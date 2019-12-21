@@ -33,10 +33,14 @@ export default {
       this.todos.push(...this.todos, ...todoData.data.listTodos.items);
     },
     subscribe(){
-      API.graphql(graphqlOperation(onCreateTodo)).subscribe({
+      API.graphql(graphqlOperation(onCreateTodo))
+      .subscribe({
         next: (eventData) => {
           const todo = eventData.value.data.onCreateTodo;
           this.todos.push(todo);
+        },
+        error: (err) => {
+          alert('Subscription Error', err)
         }
       })
     }
