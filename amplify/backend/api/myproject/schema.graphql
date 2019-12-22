@@ -6,6 +6,12 @@ type Todo @model {
 
 type Customer @model {
   id: ID!
-  name: String!
-  description: String
+  companyName: String!
+  postalCode: String
+  address1: String
+  address2: String
+  address3: String
+  name: String
+  invoiceNumber: String
+  message: String
 }

@@ -27,8 +27,14 @@ export const listTodos = `query ListTodos(
 export const getCustomer = `query GetCustomer($id: ID!) {
   getCustomer(id: $id) {
     id
+    companyName
+    postalCode
+    address1
+    address2
+    address3
     name
-    description
+    invoiceNumber
+    message
   }
 }
 `;
@@ -40,8 +46,14 @@ export const listCustomers = `query ListCustomers(
   listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      companyName
+      postalCode
+      address1
+      address2
+      address3
       name
-      description
+      invoiceNumber
+      message
     }
     nextToken
   }

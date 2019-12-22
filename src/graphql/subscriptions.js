@@ -28,24 +28,42 @@ export const onDeleteTodo = `subscription OnDeleteTodo {
 export const onCreateCustomer = `subscription OnCreateCustomer {
   onCreateCustomer {
     id
+    companyName
+    postalCode
+    address1
+    address2
+    address3
     name
-    description
+    invoiceNumber
+    message
   }
 }
 `;
 export const onUpdateCustomer = `subscription OnUpdateCustomer {
   onUpdateCustomer {
     id
+    companyName
+    postalCode
+    address1
+    address2
+    address3
     name
-    description
+    invoiceNumber
+    message
   }
 }
 `;
 export const onDeleteCustomer = `subscription OnDeleteCustomer {
   onDeleteCustomer {
     id
+    companyName
+    postalCode
+    address1
+    address2
+    address3
     name
-    description
+    invoiceNumber
+    message
   }
 }
 `;

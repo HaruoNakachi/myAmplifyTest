@@ -40,8 +40,14 @@ export const createCustomer = `mutation CreateCustomer(
 ) {
   createCustomer(input: $input, condition: $condition) {
     id
+    companyName
+    postalCode
+    address1
+    address2
+    address3
     name
-    description
+    invoiceNumber
+    message
   }
 }
 `;
@@ -51,8 +57,14 @@ export const updateCustomer = `mutation UpdateCustomer(
 ) {
   updateCustomer(input: $input, condition: $condition) {
     id
+    companyName
+    postalCode
+    address1
+    address2
+    address3
     name
-    description
+    invoiceNumber
+    message
   }
 }
 `;
@@ -62,8 +74,14 @@ export const deleteCustomer = `mutation DeleteCustomer(
 ) {
   deleteCustomer(input: $input, condition: $condition) {
     id
+    companyName
+    postalCode
+    address1
+    address2
+    address3
     name
-    description
+    invoiceNumber
+    message
   }
 }
 `;
