@@ -40,7 +40,7 @@ export default {
           this.todos.push(todo);
         },
         error: (err) => {
-          alert('Subscription Error', err)
+          alert("Subscription Error: " + err.message)
         }
       })
     }
