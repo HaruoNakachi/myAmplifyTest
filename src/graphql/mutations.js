@@ -34,3 +34,36 @@ export const deleteTodo = `mutation DeleteTodo(
   }
 }
 `;
+export const createCustomer = `mutation CreateCustomer(
+  $input: CreateCustomerInput!
+  $condition: ModelCustomerConditionInput
+) {
+  createCustomer(input: $input, condition: $condition) {
+    id
+    name
+    description
+  }
+}
+`;
+export const updateCustomer = `mutation UpdateCustomer(
+  $input: UpdateCustomerInput!
+  $condition: ModelCustomerConditionInput
+) {
+  updateCustomer(input: $input, condition: $condition) {
+    id
+    name
+    description
+  }
+}
+`;
+export const deleteCustomer = `mutation DeleteCustomer(
+  $input: DeleteCustomerInput!
+  $condition: ModelCustomerConditionInput
+) {
+  deleteCustomer(input: $input, condition: $condition) {
+    id
+    name
+    description
+  }
+}
+`;

@@ -25,3 +25,27 @@ export const onDeleteTodo = `subscription OnDeleteTodo {
   }
 }
 `;
+export const onCreateCustomer = `subscription OnCreateCustomer {
+  onCreateCustomer {
+    id
+    name
+    description
+  }
+}
+`;
+export const onUpdateCustomer = `subscription OnUpdateCustomer {
+  onUpdateCustomer {
+    id
+    name
+    description
+  }
+}
+`;
+export const onDeleteCustomer = `subscription OnDeleteCustomer {
+  onDeleteCustomer {
+    id
+    name
+    description
+  }
+}
+`;

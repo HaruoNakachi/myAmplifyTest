@@ -24,3 +24,26 @@ export const listTodos = `query ListTodos(
   }
 }
 `;
+export const getCustomer = `query GetCustomer($id: ID!) {
+  getCustomer(id: $id) {
+    id
+    name
+    description
+  }
+}
+`;
+export const listCustomers = `query ListCustomers(
+  $filter: ModelCustomerFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      description
+    }
+    nextToken
+  }
+}
+`;
