@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/vuejs">Vuejs</router-link> |
-      <router-link to="/todos">Todos</router-link> |
-      <router-link to="/about">About</router-link>
+      <!-- <router-link to="/vuejs">Vuejs</router-link> |
+      <router-link to="/about">About</router-link> -->
     </div>
     <router-view/>
   </div>
