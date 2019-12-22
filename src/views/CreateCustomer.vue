@@ -1,21 +1,6 @@
 <template>
   <div id='app'>
-    <div class="form-group">
-      <label for="name">Customer Name</label>
-      <input type="text"
-            id="name"
-            class="form-control"
-            v-model="customer.name">
-    </div>
-
-    <div class="form-group">
-      <label for="description">Customer Description</label>
-      <input type="text"
-            id="description"
-            class="form-control"
-            v-model="customer.description">
-    </div>
-
+    <CustomerForm v-bind:customer="customer"/>
     <button @click="createNewCustomer">Add Customer</button>
   </div>
 </template>
@@ -23,9 +8,13 @@
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { createCustomer } from '../graphql/mutations';
+import CustomerForm from '@/components/CustomerForm.vue'
 
 export default {
   name: 'createCustomer',
+  components: {
+    CustomerForm
+  },
   data(){
     return {
       customer: {
