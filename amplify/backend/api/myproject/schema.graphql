@@ -6,7 +6,7 @@ type Todo @model {
 
 type Customer @model {
   id: ID!
-  companyName: String!
+  companyName: String
   postalCode: String
   address1: String
   address2: String

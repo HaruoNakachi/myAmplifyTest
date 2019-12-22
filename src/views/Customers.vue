@@ -6,7 +6,6 @@
         <ul>
           <li>{{customer.id}}</li>
           <li>{{customer.name}}</li>
-          <li>{{customer.description}}</li>
         </ul>
       </li>
     </ul>
