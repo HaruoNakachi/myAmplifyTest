@@ -5,6 +5,7 @@ import Todos from '../views/Todos.vue'
 import CreateCustomer from '../views/CreateCustomer.vue'
 import Customers from '../views/Customers.vue'
 import Vuejs from '../views/Vuejs.vue'
+import Vuetify from '../views/Vuetify.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/vuejs',
     name: 'vuejs',
     component: Vuejs
+  },
+  {
+    path: '/vuetify',
+    name: 'vuetify',
+    component: Vuetify
   },
   {
     path: '/about',

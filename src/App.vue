@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/todos">Todos(Sample)</router-link> |
       <router-link to="/customers">Customers</router-link> |
-      <router-link to="/vuejs">Vuejs</router-link>
+      <router-link to="/vuejs">Vuejs</router-link> |
+      <router-link to="/vuetify">Vuetify</router-link>
     </div>
     <router-view/>
   </div>
