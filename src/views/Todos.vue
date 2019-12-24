@@ -40,12 +40,13 @@ export default {
             },
             error: err => {
               alert("Subscription Error: " + err.message);
-              const result = confirm("再接続しますか？");
+              const result = confirm("リロードして再接続しますか？");
               if (result) {
                 setTimeout(() => {
                   subscription.unsubscribe();
-                  alert("UNSUBSCRIBED")
-                  this.subscribe();
+                  // コネクションが切れていたらリロードさせる
+                  alert("RELOAD")
+                  this.$router.go({path: this.$router.currentRoute.path, force: true})
                 }, 1000);
               } else {
                 alert("再接続しませんでした。")
