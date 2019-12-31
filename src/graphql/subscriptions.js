@@ -36,6 +36,17 @@ export const onCreateCustomer = `subscription OnCreateCustomer {
     name
     invoiceNumber
     message
+    billingItems {
+      items {
+        id
+        customerId
+        name
+        price
+        unit
+        quantity
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -50,6 +61,17 @@ export const onUpdateCustomer = `subscription OnUpdateCustomer {
     name
     invoiceNumber
     message
+    billingItems {
+      items {
+        id
+        customerId
+        name
+        price
+        unit
+        quantity
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -64,6 +86,50 @@ export const onDeleteCustomer = `subscription OnDeleteCustomer {
     name
     invoiceNumber
     message
+    billingItems {
+      items {
+        id
+        customerId
+        name
+        price
+        unit
+        quantity
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const onCreateBillingItem = `subscription OnCreateBillingItem {
+  onCreateBillingItem {
+    id
+    customerId
+    name
+    price
+    unit
+    quantity
+  }
+}
+`;
+export const onUpdateBillingItem = `subscription OnUpdateBillingItem {
+  onUpdateBillingItem {
+    id
+    customerId
+    name
+    price
+    unit
+    quantity
+  }
+}
+`;
+export const onDeleteBillingItem = `subscription OnDeleteBillingItem {
+  onDeleteBillingItem {
+    id
+    customerId
+    name
+    price
+    unit
+    quantity
   }
 }
 `;

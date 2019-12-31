@@ -48,6 +48,17 @@ export const createCustomer = `mutation CreateCustomer(
     name
     invoiceNumber
     message
+    billingItems {
+      items {
+        id
+        customerId
+        name
+        price
+        unit
+        quantity
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -65,6 +76,17 @@ export const updateCustomer = `mutation UpdateCustomer(
     name
     invoiceNumber
     message
+    billingItems {
+      items {
+        id
+        customerId
+        name
+        price
+        unit
+        quantity
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -82,6 +104,59 @@ export const deleteCustomer = `mutation DeleteCustomer(
     name
     invoiceNumber
     message
+    billingItems {
+      items {
+        id
+        customerId
+        name
+        price
+        unit
+        quantity
+      }
+      nextToken
+    }
+  }
+}
+`;
+export const createBillingItem = `mutation CreateBillingItem(
+  $input: CreateBillingItemInput!
+  $condition: ModelBillingItemConditionInput
+) {
+  createBillingItem(input: $input, condition: $condition) {
+    id
+    customerId
+    name
+    price
+    unit
+    quantity
+  }
+}
+`;
+export const updateBillingItem = `mutation UpdateBillingItem(
+  $input: UpdateBillingItemInput!
+  $condition: ModelBillingItemConditionInput
+) {
+  updateBillingItem(input: $input, condition: $condition) {
+    id
+    customerId
+    name
+    price
+    unit
+    quantity
+  }
+}
+`;
+export const deleteBillingItem = `mutation DeleteBillingItem(
+  $input: DeleteBillingItemInput!
+  $condition: ModelBillingItemConditionInput
+) {
+  deleteBillingItem(input: $input, condition: $condition) {
+    id
+    customerId
+    name
+    price
+    unit
+    quantity
   }
 }
 `;

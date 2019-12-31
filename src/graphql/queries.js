@@ -35,6 +35,17 @@ export const getCustomer = `query GetCustomer($id: ID!) {
     name
     invoiceNumber
     message
+    billingItems {
+      items {
+        id
+        customerId
+        name
+        price
+        unit
+        quantity
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -54,6 +65,38 @@ export const listCustomers = `query ListCustomers(
       name
       invoiceNumber
       message
+      billingItems {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getBillingItem = `query GetBillingItem($id: ID!) {
+  getBillingItem(id: $id) {
+    id
+    customerId
+    name
+    price
+    unit
+    quantity
+  }
+}
+`;
+export const listBillingItems = `query ListBillingItems(
+  $filter: ModelBillingItemFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBillingItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      customerId
+      name
+      price
+      unit
+      quantity
     }
     nextToken
   }
