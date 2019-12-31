@@ -18,7 +18,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import { listCustomers } from '../graphql/queries';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import pdfDefinitionBuilder from '../plugins/pdfmakeDefinitionBuilder';
+import invoicePdfBuilder from '../plugins/invoicePdfBuilder';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 pdfMake.fonts = {
@@ -44,7 +44,7 @@ export default {
     },
     genPdf(){
       console.log('genPdf start');
-      const docDefinition = pdfDefinitionBuilder.build()
+      const docDefinition = invoicePdfBuilder.build()
       pdfMake.createPdf(docDefinition).download()
     }
   },
