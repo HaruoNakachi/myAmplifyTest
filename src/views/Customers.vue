@@ -16,19 +16,8 @@
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { listCustomers } from '../graphql/queries';
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import invoicePdfBuilder from '../plugins/invoicePdfBuilder';
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-pdfMake.fonts = {
-  GenShin: {
-    normal: 'GenShinGothic-Normal-Sub.ttf',
-    bold: 'GenShinGothic-Normal-Sub.ttf',
-    italics: 'GenShinGothic-Normal-Sub.ttf',
-    bolditalics: 'GenShinGothic-Normal-Sub.ttf',
-  },
-};
+import pdfMakeJa from "../plugins/pdfMakeJa";
+import invoicePdfDefinitionBuilder from '../plugins/invoicePdfDefinitionBuilder';
 
 export default {
   name: 'customers',
@@ -44,8 +33,8 @@ export default {
     },
     genPdf(){
       console.log('genPdf start');
-      const docDefinition = invoicePdfBuilder.build()
-      pdfMake.createPdf(docDefinition).download()
+      const docDefinition = invoicePdfDefinitionBuilder.build()
+      pdfMakeJa.createPdf(docDefinition).download()
     }
   },
   created(){
