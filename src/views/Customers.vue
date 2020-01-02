@@ -1,10 +1,13 @@
 <template>
   <div id='app'>
-    <router-link to="/create_customer"><button>Add Customer</button></router-link>
+    <router-link to="/create_customer"><v-btn>Add Customer</v-btn></router-link>
     <ul>
       <li v-for="customer in customers" :key="customer.id">
         <ul>
-          <li>{{customer.companyName}}</li>
+          <li>
+            {{customer.companyName}}
+            <router-link :to="'/customer/' + customer.id"><v-btn>Detail</v-btn></router-link>
+          </li>
         </ul>
       </li>
     </ul>
