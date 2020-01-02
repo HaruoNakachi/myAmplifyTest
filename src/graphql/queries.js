@@ -31,10 +31,10 @@ export const getCustomer = `query GetCustomer($id: ID!) {
     postalCode
     address1
     address2
-    address3
-    name
+    position
+    recipient
     invoiceNumber
-    message
+    memo
     billingItems {
       items {
         id
@@ -61,10 +61,10 @@ export const listCustomers = `query ListCustomers(
       postalCode
       address1
       address2
-      address3
-      name
+      position
+      recipient
       invoiceNumber
-      message
+      memo
       billingItems {
         nextToken
       }

@@ -10,10 +10,10 @@ type Customer @model {
   postalCode: String
   address1: String
   address2: String
-  address3: String
-  name: String
+  position: String
+  recipient: String
   invoiceNumber: String
-  message: String
+  memo: String
   billingItems: [BillingItem] @connection(keyName: "byCustomer", fields: ["id"])
 }
 

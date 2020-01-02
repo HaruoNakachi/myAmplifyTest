@@ -44,10 +44,10 @@ export const createCustomer = `mutation CreateCustomer(
     postalCode
     address1
     address2
-    address3
-    name
+    position
+    recipient
     invoiceNumber
-    message
+    memo
     billingItems {
       items {
         id
@@ -72,10 +72,10 @@ export const updateCustomer = `mutation UpdateCustomer(
     postalCode
     address1
     address2
-    address3
-    name
+    position
+    recipient
     invoiceNumber
-    message
+    memo
     billingItems {
       items {
         id
@@ -100,10 +100,10 @@ export const deleteCustomer = `mutation DeleteCustomer(
     postalCode
     address1
     address2
-    address3
-    name
+    position
+    recipient
     invoiceNumber
-    message
+    memo
     billingItems {
       items {
         id

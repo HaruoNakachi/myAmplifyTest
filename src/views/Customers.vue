@@ -4,8 +4,7 @@
     <ul>
       <li v-for="customer in customers" :key="customer.id">
         <ul>
-          <li>{{customer.id}}</li>
-          <li>{{customer.name}}</li>
+          <li>{{customer.companyName}}</li>
         </ul>
       </li>
     </ul>

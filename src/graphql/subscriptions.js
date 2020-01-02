@@ -32,10 +32,10 @@ export const onCreateCustomer = `subscription OnCreateCustomer {
     postalCode
     address1
     address2
-    address3
-    name
+    position
+    recipient
     invoiceNumber
-    message
+    memo
     billingItems {
       items {
         id
@@ -57,10 +57,10 @@ export const onUpdateCustomer = `subscription OnUpdateCustomer {
     postalCode
     address1
     address2
-    address3
-    name
+    position
+    recipient
     invoiceNumber
-    message
+    memo
     billingItems {
       items {
         id
@@ -82,10 +82,10 @@ export const onDeleteCustomer = `subscription OnDeleteCustomer {
     postalCode
     address1
     address2
-    address3
-    name
+    position
+    recipient
     invoiceNumber
-    message
+    memo
     billingItems {
       items {
         id

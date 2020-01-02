@@ -16,7 +16,7 @@ const builder = {
     var postalCode = '〒107-0052'
     var address1 = '東京都港区赤坂4-13-5'
     var address2 = '赤坂オフィスハイツ1F'
-    var address3 = '代表取締役'
+    var position = '代表取締役'
     var name = '八島 国博' + '  様'
     var seikyuBi = '2019/12/25'
     var oshiharaiKigen = '2019/12/31'
@@ -98,7 +98,7 @@ const builder = {
                 '\n',
                 { text: address2, fontSize: 11, bold: true },
                 '\n',
-                { text: address3, fontSize: 11, bold: true },
+                { text: position, fontSize: 11, bold: true },
                 '\n',
                 { text: name, fontSize: 11, bold: true },
                 '\n',
