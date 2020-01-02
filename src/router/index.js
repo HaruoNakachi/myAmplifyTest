@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Todos from '../views/Todos.vue'
+import Customer from '../views/Customer.vue'
 import CreateCustomer from '../views/CreateCustomer.vue'
 import Customers from '../views/Customers.vue'
 import Vuejs from '../views/Vuejs.vue'
@@ -19,6 +20,10 @@ const routes = [
     path: '/todos',
     name: 'todos',
     component: Todos
+  },
+  {
+    path: '/customer/:id',
+    component: Customer
   },
   {
     path: '/create_customer',
