@@ -9,6 +9,8 @@ import Customers from '../views/Customers.vue'
 import Vuejs from '../views/Vuejs.vue'
 import Vuetify from '../views/Vuetify.vue'
 import CreateBillingItem from '../views/CreateBillingItem.vue'
+import BillingItem from '../views/BillingItem.vue'
+import EditBillingItem from '../views/EditBillingItem.vue'
 
 Vue.use(VueRouter)
 
@@ -24,7 +26,7 @@ const routes = [
     component: Todos
   },
   {
-    path: '/customer/:id',
+    path: '/customers/:id',
     component: Customer
   },
   {
@@ -40,6 +42,16 @@ const routes = [
     path: '/customers/:customerId/create_billing_item',
     name: 'createBillingItem',
     component: CreateBillingItem
+  },
+  {
+    path: '/customers/:customerId/billing_items/:billingItemId',
+    name: 'billingItem',
+    component: BillingItem
+  },
+  {
+    path: '/customers/:customerId/edit_billing_item/:billingItemId',
+    name: 'editBillingItem',
+    component: EditBillingItem
   },
   {
     path: '/customers',

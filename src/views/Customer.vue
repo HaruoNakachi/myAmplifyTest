@@ -9,7 +9,7 @@
         <ul>
           <li>
             {{billingItem.name}}
-            <router-link :to="'/customers/' + billingItem.customerId + '/billingItems/' + billingItem.id"><v-btn>Detail</v-btn></router-link>
+            <router-link :to="'/customers/' + billingItem.customerId + '/billing_items/' + billingItem.id"><v-btn>Detail</v-btn></router-link>
           </li>
         </ul>
       </li>
@@ -53,4 +53,3 @@ export default {
   }
 }
 </script>
-

@@ -42,7 +42,7 @@ export default {
             memo: this.customer.memo,
           }
         }))
-        this.$router.push('/customer/' + this.customer.id)
+        this.$router.push('/customers/' + this.customer.id)
       } catch(e) {
         console.error('GraphQL Operation Failed: ', e)
         console.error(this.customer)

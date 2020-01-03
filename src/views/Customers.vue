@@ -6,7 +6,7 @@
         <ul>
           <li>
             {{customer.companyName}}
-            <router-link :to="'/customer/' + customer.id"><v-btn>Detail</v-btn></router-link>
+            <router-link :to="'/customers/' + customer.id"><v-btn>Detail</v-btn></router-link>
           </li>
         </ul>
       </li>
