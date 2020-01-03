@@ -5,8 +5,32 @@
       <router-link to="/about">About</router-link> -->
     </div>
     <router-view/>
+    <button id="authorize-button" @click="login">Authorize</button>
+    <button id="signout-button" @click="logout">Sign Out</button>
+    <button id="create-draft-mail-button" @click="createDraftMail">Create Draft Mail</button>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'home',
+  methods: {
+    login () {
+      if (this.$isAuthenticated() !== true) {
+        this.$login()
+      }
+    },
+    logout () {
+      this.$logout()
+    },
+    createDraftMail(){
+      // this.$getGapiClient()
+      //   .then(gapi => {
+      //   })
+    }
+  }
+}
+</script>
 
 <style>
 #app {
