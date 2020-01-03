@@ -14,13 +14,16 @@
         </ul>
       </li>
     </ul>
+    <v-btn @click="genPdf">Generate Invoice PDF</v-btn>
   </div>
 </template>
 
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { getCustomer } from '../graphql/queries';
-import CustomerForm from '@/components/CustomerForm.vue'
+import CustomerForm from '@/components/CustomerForm.vue';
+import pdfMakeJa from "../plugins/pdfMakeJa";
+import invoicePdfDefinitionBuilder from '../plugins/invoicePdfDefinitionBuilder';
 
 export default {
   name: 'customer',
@@ -45,6 +48,10 @@ export default {
     },
     addBillingItem(){
       this.$router.push('/customers/' + this.customer.id +'/create_billing_item/')
+    },
+    genPdf(){
+      const docDefinition = invoicePdfDefinitionBuilder.build(this.customer, this.billingItems)
+      pdfMakeJa.createPdf(docDefinition).download()
     }
   },
   created(){

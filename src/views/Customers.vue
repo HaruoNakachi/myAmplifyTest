@@ -11,15 +11,12 @@
         </ul>
       </li>
     </ul>
-    <v-btn @click="genPdf">TEST</v-btn>
   </div>
 </template>
 
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { listCustomers } from '../graphql/queries';
-import pdfMakeJa from "../plugins/pdfMakeJa";
-import invoicePdfDefinitionBuilder from '../plugins/invoicePdfDefinitionBuilder';
 
 export default {
   name: 'customers',
@@ -32,11 +29,6 @@ export default {
     async getData(){
       const customerData = await API.graphql(graphqlOperation(listCustomers))
       this.customers.push(...this.customers, ...customerData.data.listCustomers.items)
-    },
-    genPdf(){
-      console.log('genPdf start');
-      const docDefinition = invoicePdfDefinitionBuilder.build()
-      pdfMakeJa.createPdf(docDefinition).download()
     }
   },
   created(){

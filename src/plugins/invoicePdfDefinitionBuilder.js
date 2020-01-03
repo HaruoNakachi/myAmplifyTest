@@ -1,7 +1,15 @@
+const moment = require('moment');
+moment.locale('ja');
+const currentDate = moment();
+
+const comma = (num) => {
+  return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+}
+
 const builder = {
-  build: function(){
+  build: function(customer, billingItems){
     const docDefinition = {
-      content: this.docContent(),
+      content: this.docContent(customer, billingItems),
       pageMargins: [60, 50, 60, 0],
       defaultStyle: {
         font: 'GenShin',
@@ -9,19 +17,44 @@ const builder = {
     };
     return docDefinition
   },
-  docContent: function(){
-    var issuedDate = '2019/12/25'
-    var invoiceNumber = '2019-12-005'
-    var companyName = '株式会社Office bebe'
-    var postalCode = '〒107-0052'
-    var address1 = '東京都港区赤坂4-13-5'
-    var address2 = '赤坂オフィスハイツ1F'
-    var position = '代表取締役'
-    var name = '八島 国博' + '  様'
-    var seikyuBi = '2019/12/25'
-    var oshiharaiKigen = '2019/12/31'
-    var totalAmount = '99,000'
-    var items = [
+  docContent: function(customer, billingItems){
+    const issuedDate = currentDate.format("YYYY/M/D")
+    const invoiceNumber = currentDate.format("YYYY-MM-") + customer.invoiceNumber
+    const companyName = customer.companyName
+    const postalCode = '〒' + customer.postalCode
+    const address1 = customer.address1
+    const address2 = customer.address2
+    const position = customer.position
+    const name = customer.recipient + '  様'
+    const billingDate = currentDate.format("YYYY/M/D")
+    const paymentDeadline = currentDate.endOf('month').format("YYYY/M/D")
+    const taxRate = 10
+    const rowNum = 6
+    const memo = customer.memo
+
+    let nonTaxedPrice = 0
+    billingItems.forEach((billingItem) => {
+      nonTaxedPrice += billingItem.price
+    })
+    const tax = nonTaxedPrice * (taxRate / 100)
+    const totalAmount = nonTaxedPrice + tax
+    const nonTaxedPriceText = comma(nonTaxedPrice)
+    const taxText = comma(tax)
+    const totalAmountText = comma(totalAmount)
+    const billingItemsForTable = billingItems.map((billingItem) => {
+      return [
+        { text: billingItem.name, fontSize: 10, alignment: 'left'},
+        { text: comma(billingItem.price), fontSize: 10, alignment: 'right'},
+        { text: billingItem.quantity, fontSize: 10, alignment: 'right'},
+        { text: billingItem.unit, fontSize: 10, alignment: 'right'},
+        { text: comma(billingItem.price * billingItem.quantity), fontSize: 10, alignment: 'right'}
+      ]
+    })
+    const brankRows = []
+    for (let i = 0; i < rowNum - billingItemsForTable.length; i++) {
+      brankRows.push([ '', '', '', '', ' ' ])
+    }
+    const tableItems = [
       [
         { text: '品名', fillColor: '#bdcf99'},
         { text: '単価', fillColor: '#bdcf99'},
@@ -29,36 +62,9 @@ const builder = {
         { text: '単位', fillColor: '#bdcf99'},
         { text: '金額', fillColor: '#bdcf99'}
       ],
-      [
-        { text: 'システム開発料', fontSize: 10, alignment: 'left'},
-        { text: '40,000', fontSize: 10, alignment: 'right'},
-        { text: '1', fontSize: 10, alignment: 'right'},
-        { text: '月分', fontSize: 10, alignment: 'right'},
-        { text: '40,000', fontSize: 10, alignment: 'right'}
-      ],
-      [
-        { text: 'システム利用料', fontSize: 10, alignment: 'left'},
-        { text: '40,000', fontSize: 10, alignment: 'right'},
-        { text: '1', fontSize: 10, alignment: 'right'},
-        { text: '月分', fontSize: 10, alignment: 'right'},
-        { text: '40,000', fontSize: 10, alignment: 'right'}
-      ],
-      [
-        { text: 'モバイルアプリ開発、維持費用', fontSize: 10, alignment: 'left'},
-        { text: '10,000', fontSize: 10, alignment: 'right'},
-        { text: '1', fontSize: 10, alignment: 'right'},
-        { text: '月分', fontSize: 10, alignment: 'right'},
-        { text: '10,000', fontSize: 10, alignment: 'right'}
-      ],
-      [ '', '', '', '', ' ' ],
-      [ '', '', '', '', ' ' ],
-      [ '', '', '', '', ' ' ],
-      [ '', '', '', '', ' ' ],
+      ...billingItemsForTable,
+      ...brankRows
     ]
-    var nonTaxedPrice = '90,000'
-    var tax = '9,000'
-    var memo = 'テスト用メモ'
-
     const content =
       [
         {
@@ -148,9 +154,9 @@ const builder = {
             {
               margin: [0, 0, 0, 0],
               text: [
-                { text: '請求日: ' + seikyuBi, fontSize: 10, bold: true },
+                { text: '請求日: ' + billingDate, fontSize: 10, bold: true },
                 '\n',
-                { text: 'お支払期限: ' + oshiharaiKigen, fontSize: 10, bold: true },
+                { text: 'お支払期限: ' + paymentDeadline, fontSize: 10, bold: true },
               ]
             },
           ]
@@ -161,7 +167,7 @@ const builder = {
               margin: [0, 10, 0, 30],
               decoration: 'underline',
               text: [
-                { text: '御請求金額    ¥' + totalAmount + '  ', fontSize: 16, bold: true },
+                { text: '御請求金額    ¥' + totalAmountText + '  ', fontSize: 16, bold: true },
               ]
             },
           ]
@@ -173,7 +179,7 @@ const builder = {
             // you can declare how many rows should be treated as headers
             headerRows: 1,
             widths: [180, 50, 50, 50, '*'],
-            body: items,
+            body: tableItems,
           }
         },
         {
@@ -186,9 +192,9 @@ const builder = {
             body: [
               [
                 { text: '合計', fillColor: '#bdcf99', fontSize: 12 },
-                { text: '税抜\n¥' + nonTaxedPrice, fontSize: 10, alignment: 'right' },
-                { text: '消費税\n¥' + tax, fontSize: 10, alignment: 'right' },
-                { text: '総額\n¥' + totalAmount, fontSize: 10, alignment: 'right' }
+                { text: '税抜\n¥' + nonTaxedPriceText, fontSize: 10, alignment: 'right' },
+                { text: '消費税\n¥' + taxText, fontSize: 10, alignment: 'right' },
+                { text: '総額\n¥' + totalAmountText, fontSize: 10, alignment: 'right' }
               ],
             ]
           },
