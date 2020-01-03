@@ -19,7 +19,7 @@
 
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { getCustomer, listBillingItems } from '../graphql/queries';
+import { getCustomer } from '../graphql/queries';
 import CustomerForm from '@/components/CustomerForm.vue'
 
 export default {
@@ -37,9 +37,8 @@ export default {
   methods: {
     async getData(){
       const customerData = await API.graphql(graphqlOperation(getCustomer, { id: this.$route.params.id}))
-      const billingItemsData = await API.graphql(graphqlOperation(listBillingItems))
       this.customer = customerData.data.getCustomer
-      this.billingItems = billingItemsData.data.listBillingItems.items
+      this.billingItems = customerData.data.getCustomer.billingItems.items
     },
     editCustomer(){
       this.$router.push('/edit_customer/' + this.customer.id)
