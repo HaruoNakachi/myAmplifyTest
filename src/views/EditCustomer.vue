@@ -1,7 +1,7 @@
 <template>
   <div id='app'>
     <CustomerForm v-bind:customer="customer"/>
-    <v-btn color='dark' @click="saveCustomer">Save Customer</v-btn>
+    <v-btn @click="saveCustomer">Save Customer</v-btn>
   </div>
 </template>
 
