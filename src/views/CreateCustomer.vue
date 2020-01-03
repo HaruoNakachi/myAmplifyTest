@@ -32,10 +32,8 @@ export default {
   methods:{
     async createNewCustomer(){
       try {
-        console.log('TRY')
         await API.graphql(graphqlOperation(createCustomer, { input: this.customer }))
         this.$router.push('customers')
-        console.log('Moved')
       } catch (e) {
         console.error('GraphQL Operation Failed: ', e)
         console.error(this.customer)

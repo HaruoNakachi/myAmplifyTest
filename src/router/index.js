@@ -8,6 +8,7 @@ import CreateCustomer from '../views/CreateCustomer.vue'
 import Customers from '../views/Customers.vue'
 import Vuejs from '../views/Vuejs.vue'
 import Vuetify from '../views/Vuetify.vue'
+import CreateBillingItem from '../views/CreateBillingItem.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/create_customer',
     name: 'createCustomer',
     component: CreateCustomer
+  },
+  {
+    path: '/customers/:customerId/create_billing_item',
+    name: 'createBillingItem',
+    component: CreateBillingItem
   },
   {
     path: '/customers',
