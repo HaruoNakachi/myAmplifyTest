@@ -12,6 +12,8 @@
 </template>
 
 <script>
+const Base64 = require('js-base64').Base64;
+
 export default {
   name: 'home',
   methods: {
@@ -24,9 +26,32 @@ export default {
       this.$logout()
     },
     createDraftMail(){
-      // this.$getGapiClient()
-      //   .then(gapi => {
-      //   })
+        const messageParts = [
+        'From: Justin Beckwith <beckwith@google.com>',
+        'To: Justin Beckwith <beckwith@google.com>',
+        'Content-Type: text/html; charset=utf-8',
+        'MIME-Version: 1.0',
+        `Subject: THIS IS TITLE`,
+        '',
+        'This is a message just to say hello.',
+        'So... <b>Hello!</b>',
+      ];
+      const message = messageParts.join('\n');
+
+      this.$gapi.getGapiClient()
+        .then(gapi => {
+          const request = gapi.client.gmail.users.drafts.create({
+            'userId': 'me',
+            'resource': {
+              'message': {
+                'raw': Base64.encodeURI(message)
+              }
+            }
+          })
+          request.execute(()=>{
+            console.log('DRAFT MAIL CREATED')
+          })
+        })
     }
   }
 }

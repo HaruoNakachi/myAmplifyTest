@@ -12,6 +12,7 @@
     "@aws-amplify/pubsub": "^2.1.2",
     "core-js": "^3.4.3",
     "googleapis": "^46.0.0",
+    "js-base64": "^2.5.1",
     "moment": "^2.24.0",
     "pdfmake": "^0.1.63",
     "vue": "^2.6.10",
