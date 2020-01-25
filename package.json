@@ -15,6 +15,7 @@
     "js-base64": "^2.5.1",
     "moment": "^2.24.0",
     "pdfmake": "^0.1.63",
+    "scraperjs": "^1.2.0",
     "vue": "^2.6.10",
     "vue-gapi": "^0.1.0",
     "vue-router": "^3.1.3",

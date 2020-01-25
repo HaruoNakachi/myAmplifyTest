@@ -14,6 +14,9 @@ type Customer @model {
   recipient: String
   invoiceNumber: String
   memo: String
+  to: String
+  cc: String
+  mailName: String
   billingItems: [BillingItem] @connection(keyName: "byCustomer", fields: ["id"])
 }
 

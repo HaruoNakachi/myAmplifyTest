@@ -35,6 +35,9 @@ export const getCustomer = `query GetCustomer($id: ID!) {
     recipient
     invoiceNumber
     memo
+    to
+    cc
+    mailName
     billingItems {
       items {
         id
@@ -65,6 +68,9 @@ export const listCustomers = `query ListCustomers(
       recipient
       invoiceNumber
       memo
+      to
+      cc
+      mailName
       billingItems {
         nextToken
       }

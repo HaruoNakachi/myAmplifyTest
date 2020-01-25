@@ -1,7 +1,3 @@
-const moment = require('moment');
-moment.locale('ja');
-const currentDate = moment();
-
 const comma = (num) => {
   return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
 }
@@ -18,6 +14,10 @@ const builder = {
     return docDefinition
   },
   docContent: function(customer, billingItems){
+    const moment = require('moment');
+    moment.locale('ja');
+    const currentDate = moment();
+
     const issuedDate = currentDate.format("YYYY/M/D")
     const invoiceNumber = currentDate.format("YYYY-MM-") + customer.invoiceNumber
     const companyName = customer.companyName

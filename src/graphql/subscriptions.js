@@ -36,6 +36,9 @@ export const onCreateCustomer = `subscription OnCreateCustomer {
     recipient
     invoiceNumber
     memo
+    to
+    cc
+    mailName
     billingItems {
       items {
         id
@@ -61,6 +64,9 @@ export const onUpdateCustomer = `subscription OnUpdateCustomer {
     recipient
     invoiceNumber
     memo
+    to
+    cc
+    mailName
     billingItems {
       items {
         id
@@ -86,6 +92,9 @@ export const onDeleteCustomer = `subscription OnDeleteCustomer {
     recipient
     invoiceNumber
     memo
+    to
+    cc
+    mailName
     billingItems {
       items {
         id

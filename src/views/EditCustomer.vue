@@ -40,6 +40,9 @@ export default {
             recipient: this.customer.recipient,
             invoiceNumber: this.customer.invoiceNumber,
             memo: this.customer.memo,
+            to: this.customer.to,
+            cc: this.customer.cc,
+            mailName: this.customer.mailName,
           }
         }))
         this.$router.push('/customers/' + this.customer.id)

@@ -56,7 +56,31 @@
             v-model="customer.invoiceNumber">
     </div>
 
-        <div class="form-group">
+    <div class="form-group">
+      <label for="to">To</label>
+      <input type="text"
+            id="to"
+            class="form-control"
+            v-model="customer.to">
+    </div>
+
+    <div class="form-group">
+      <label for="cc">Cc</label>
+      <input type="text"
+            id="cc"
+            class="form-control"
+            v-model="customer.cc">
+    </div>
+
+    <div class="form-group">
+      <label for="mailName">Mail Name</label>
+      <input type="text"
+            id="mailName"
+            class="form-control"
+            v-model="customer.mailName">
+    </div>
+
+    <div class="form-group">
       <label for="memo">Memo</label>
       <input type="text"
             id="memo"

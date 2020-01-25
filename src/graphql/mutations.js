@@ -48,6 +48,9 @@ export const createCustomer = `mutation CreateCustomer(
     recipient
     invoiceNumber
     memo
+    to
+    cc
+    mailName
     billingItems {
       items {
         id
@@ -76,6 +79,9 @@ export const updateCustomer = `mutation UpdateCustomer(
     recipient
     invoiceNumber
     memo
+    to
+    cc
+    mailName
     billingItems {
       items {
         id
@@ -104,6 +110,9 @@ export const deleteCustomer = `mutation DeleteCustomer(
     recipient
     invoiceNumber
     memo
+    to
+    cc
+    mailName
     billingItems {
       items {
         id

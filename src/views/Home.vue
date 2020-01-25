@@ -26,8 +26,8 @@ export default {
       this.$logout()
     },
     createDraftMail(){
-        const messageParts = [
-        'From: Justin Beckwith <beckwith@google.com>',
+      const messageParts = [
+        'From: ビズアプリ製作所 仲地 <haruo.nakachi@biz-app.biz>',
         'To: Justin Beckwith <beckwith@google.com>',
         'Content-Type: text/html; charset=utf-8',
         'MIME-Version: 1.0',
