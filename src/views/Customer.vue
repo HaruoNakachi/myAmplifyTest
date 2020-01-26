@@ -101,52 +101,48 @@ export default {
       ].join('\n');
 
       const docDefinition = invoicePdfDefinitionBuilder.build(this.customer, this.billingItems)
-      let pdfString
-      pdfString = await pdfMakeJa.createPdf(docDefinition).getBase64((convertedContent) => {
+      pdfMakeJa.createPdf(docDefinition).getBase64((convertedContent) => {
+        console.log('PDF GENERATED')
+
+        messageParts = messageParts.concat([
+          'Subject: =?UTF-8?B?' + Base64.encodeURI('【ビズアプリ製作所】ご請求書（' + currentYear + '年' + currentMonth + '月度）') + '?=',
+          "Content-Type: multipart/alternate; boundary=" + boundary + nl,
+
+          "--" + boundary,
+          "Content-Type: text/html; charset=UTF-8",
+          "Content-Transfer-Encoding: base64" ,
+          mailContent + nl,
+
+          "--" + boundary,
+          "Content-Type: application/pdf; name=" + this.customer.companyName + "様_ご請求書_" + currentDate.format("YYYY_MD") + '.pdf',
+          "Content-Disposition: attachment; filename=" + this.customer.companyName + "様_ご請求書_" + currentDate.format("YYYY_MD") + '.pdf',
+          "Content-Transfer-Encoding: base64" + nl,
+          convertedContent + nl,
+
+          "--" + boundary + "--" + nl,
+        ])
+        console.log(messageParts)
+
+        const message = messageParts.join('\n');
+
+        this.$gapi.getGapiClient()
+          .then(gapi => {
+            const request = gapi.client.gmail.users.drafts.create({
+              'userId': 'me',
+              'resource': {
+                'message': {
+                  'raw': Base64.encodeURI(message)
+                }
+              }
+            })
+            request.execute((response)=>{
+              console.log('DRAFT MAIL CREATED')
+              console.log(response)
+            })
+          })
+
         return convertedContent;
       })
-
-      messageParts = messageParts.concat([
-        'Subject: =?UTF-8?B?' + Base64.encodeURI('【ビズアプリ製作所】ご請求書（' + currentYear + '年' + currentMonth + '月度）') + '?=',
-        "Content-Type: multipart/alternate; boundary=" + boundary + nl,
-
-        "--" + boundary,
-        "Content-Type: text/html; charset=UTF-8",
-        "Content-Transfer-Encoding: base64" ,
-        mailContent + nl,
-
-        "--" + boundary,
-        "Content-Type: application/pdf; name=sample" + currentDate.format("YYYYMD_kk_mm_ss") + '.pdf',
-        "Content-Disposition: attachment; filename=sample" + currentDate.format("YYYYMD_kk_mm_ss") + '.pdf',
-        "Content-Transfer-Encoding: base64" + nl,
-        pdfString + nl,
-
-        "--" + boundary,
-        "Content-Type: application/pdf; name=sample" + currentDate.format("YYYYMD_kk_mm_ss222") + '.pdf',
-        "Content-Disposition: attachment; filename=sample" + currentDate.format("YYYYMD_kk_mm_ss222") + '.pdf',
-        "Content-Transfer-Encoding: base64" + nl,
-        pdfString + nl,
-
-        "--" + boundary,
-      ])
-
-      const message = messageParts.join('\n');
-
-      this.$gapi.getGapiClient()
-        .then(gapi => {
-          const request = gapi.client.gmail.users.drafts.create({
-            'userId': 'me',
-            'resource': {
-              'message': {
-                'raw': Base64.encodeURI(message)
-              }
-            }
-          })
-          request.execute((response)=>{
-            console.log('DRAFT MAIL CREATED')
-            console.log(response)
-          })
-        })
     }
   },
   created(){
