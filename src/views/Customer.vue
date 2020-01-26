@@ -29,6 +29,7 @@ const Base64 = require('js-base64').Base64;
 const moment = require('moment');
 moment.locale('ja');
 const currentDate = moment();
+const endOfMonthDate = moment().endOf('month');
 
 export default {
   name: 'customer',
@@ -58,10 +59,13 @@ export default {
       const docDefinition = invoicePdfDefinitionBuilder.build(this.customer, this.billingItems)
       pdfMakeJa.createPdf(docDefinition).download()
     },
-    createDraftMail(){
+    async createDraftMail(){
+      const nl = "\r\n";
+      const boundary = "__ctrlq_dot_org__";
       const currentYear = currentDate.year()
       const currentMonth = currentDate.month() + 1
       let messageParts = [
+        "MIME-Version: 1.0",
         'From: ビズアプリ製作所 仲地 <haruo.nakachi@biz-app.biz>',
         'To: <' + this.customer.to + '>'
       ]
@@ -72,12 +76,7 @@ export default {
           ]
         )
       }
-      messageParts = messageParts.concat([
-        'Content-Type: text/html; charset=utf-8',
-        'Content-Transfer-Encoding: base64',
-        'MIME-Version: 1.0',
-        'Subject: =?UTF-8?B?' + Base64.encodeURI('【ビズアプリ製作所】ご請求書（' + currentYear + '年' + currentMonth + '月度）') + '?=',
-        '',
+      const mailContent = [
         '<div>' + this.customer.companyName + '</div>',
         '<div>' + this.customer.mailName + '様</div>',
         '<div><br></div>',
@@ -87,7 +86,7 @@ export default {
         '<div>ご請求書を送付させて頂きます。</div>',
         '<div><br></div>',
         '<div>お手数をお掛けしますが、</div>',
-        '<div>ご査収の上、記載のお振込先に' + currentDate.endOf('month').format("M月D日") + '（休日の場合は銀行翌営業日）までにお振込み頂くようお願い申し上げます。</div>',
+        '<div>ご査収の上、記載のお振込先に' + endOfMonthDate.format("M月D日") + '（休日の場合は銀行翌営業日）までにお振込み頂くようお願い申し上げます。</div>',
         '<div><br></div>',
         '<div>□■──────────────────────────■□</div>',
         '<div>　　ビズアプリ製作所</div>',
@@ -98,8 +97,41 @@ export default {
         '<div>　　Email: haruo.nakachi@biz-app.biz</div>',
         '<div>　　URL:  http://biz-app.biz</div>',
         '<div>□■──────────────────────────■□</div>',
-      ]);
+        '<div><br></div>',
+      ].join('\n');
+
+      const docDefinition = invoicePdfDefinitionBuilder.build(this.customer, this.billingItems)
+      let pdfString
+      pdfString = await pdfMakeJa.createPdf(docDefinition).getBase64((convertedContent) => {
+        return convertedContent;
+      })
+
+      messageParts = messageParts.concat([
+        'Subject: =?UTF-8?B?' + Base64.encodeURI('【ビズアプリ製作所】ご請求書（' + currentYear + '年' + currentMonth + '月度）') + '?=',
+        "Content-Type: multipart/alternate; boundary=" + boundary + nl,
+
+        "--" + boundary,
+        "Content-Type: text/html; charset=UTF-8",
+        "Content-Transfer-Encoding: base64" ,
+        mailContent + nl,
+
+        "--" + boundary,
+        "Content-Type: application/pdf; name=sample" + currentDate.format("YYYYMD_kk_mm_ss") + '.pdf',
+        "Content-Disposition: attachment; filename=sample" + currentDate.format("YYYYMD_kk_mm_ss") + '.pdf',
+        "Content-Transfer-Encoding: base64" + nl,
+        pdfString + nl,
+
+        "--" + boundary,
+        "Content-Type: application/pdf; name=sample" + currentDate.format("YYYYMD_kk_mm_ss222") + '.pdf',
+        "Content-Disposition: attachment; filename=sample" + currentDate.format("YYYYMD_kk_mm_ss222") + '.pdf',
+        "Content-Transfer-Encoding: base64" + nl,
+        pdfString + nl,
+
+        "--" + boundary,
+      ])
+
       const message = messageParts.join('\n');
+
       this.$gapi.getGapiClient()
         .then(gapi => {
           const request = gapi.client.gmail.users.drafts.create({
@@ -110,8 +142,9 @@ export default {
               }
             }
           })
-          request.execute(()=>{
+          request.execute((response)=>{
             console.log('DRAFT MAIL CREATED')
+            console.log(response)
           })
         })
     }
