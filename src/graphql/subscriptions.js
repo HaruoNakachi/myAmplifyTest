@@ -1,144 +1,177 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = `subscription OnCreateTodo {
-  onCreateTodo {
-    id
-    name
-    description
-  }
-}
-`;
-export const onUpdateTodo = `subscription OnUpdateTodo {
-  onUpdateTodo {
-    id
-    name
-    description
-  }
-}
-`;
-export const onDeleteTodo = `subscription OnDeleteTodo {
-  onDeleteTodo {
-    id
-    name
-    description
-  }
-}
-`;
-export const onCreateCustomer = `subscription OnCreateCustomer {
-  onCreateCustomer {
-    id
-    companyName
-    postalCode
-    address1
-    address2
-    position
-    recipient
-    invoiceNumber
-    memo
-    to
-    cc
-    mailName
-    billingItems {
-      items {
-        id
-        customerId
-        name
-        price
-        unit
-        quantity
-      }
-      nextToken
+export const onCreateTodo = /* GraphQL */ `
+  subscription OnCreateTodo {
+    onCreateTodo {
+      id
+      name
+      description
+      createdAt
+      updatedAt
     }
   }
-}
 `;
-export const onUpdateCustomer = `subscription OnUpdateCustomer {
-  onUpdateCustomer {
-    id
-    companyName
-    postalCode
-    address1
-    address2
-    position
-    recipient
-    invoiceNumber
-    memo
-    to
-    cc
-    mailName
-    billingItems {
-      items {
-        id
-        customerId
-        name
-        price
-        unit
-        quantity
-      }
-      nextToken
+export const onUpdateTodo = /* GraphQL */ `
+  subscription OnUpdateTodo {
+    onUpdateTodo {
+      id
+      name
+      description
+      createdAt
+      updatedAt
     }
   }
-}
 `;
-export const onDeleteCustomer = `subscription OnDeleteCustomer {
-  onDeleteCustomer {
-    id
-    companyName
-    postalCode
-    address1
-    address2
-    position
-    recipient
-    invoiceNumber
-    memo
-    to
-    cc
-    mailName
-    billingItems {
-      items {
-        id
-        customerId
-        name
-        price
-        unit
-        quantity
-      }
-      nextToken
+export const onDeleteTodo = /* GraphQL */ `
+  subscription OnDeleteTodo {
+    onDeleteTodo {
+      id
+      name
+      description
+      createdAt
+      updatedAt
     }
   }
-}
 `;
-export const onCreateBillingItem = `subscription OnCreateBillingItem {
-  onCreateBillingItem {
-    id
-    customerId
-    name
-    price
-    unit
-    quantity
+export const onCreateCustomer = /* GraphQL */ `
+  subscription OnCreateCustomer {
+    onCreateCustomer {
+      id
+      companyName
+      postalCode
+      address1
+      address2
+      position
+      recipient
+      invoiceNumber
+      memo
+      to
+      cc
+      mailName
+      billingItems {
+        items {
+          id
+          customerId
+          name
+          price
+          unit
+          quantity
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
   }
-}
 `;
-export const onUpdateBillingItem = `subscription OnUpdateBillingItem {
-  onUpdateBillingItem {
-    id
-    customerId
-    name
-    price
-    unit
-    quantity
+export const onUpdateCustomer = /* GraphQL */ `
+  subscription OnUpdateCustomer {
+    onUpdateCustomer {
+      id
+      companyName
+      postalCode
+      address1
+      address2
+      position
+      recipient
+      invoiceNumber
+      memo
+      to
+      cc
+      mailName
+      billingItems {
+        items {
+          id
+          customerId
+          name
+          price
+          unit
+          quantity
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
   }
-}
 `;
-export const onDeleteBillingItem = `subscription OnDeleteBillingItem {
-  onDeleteBillingItem {
-    id
-    customerId
-    name
-    price
-    unit
-    quantity
+export const onDeleteCustomer = /* GraphQL */ `
+  subscription OnDeleteCustomer {
+    onDeleteCustomer {
+      id
+      companyName
+      postalCode
+      address1
+      address2
+      position
+      recipient
+      invoiceNumber
+      memo
+      to
+      cc
+      mailName
+      billingItems {
+        items {
+          id
+          customerId
+          name
+          price
+          unit
+          quantity
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
   }
-}
+`;
+export const onCreateBillingItem = /* GraphQL */ `
+  subscription OnCreateBillingItem {
+    onCreateBillingItem {
+      id
+      customerId
+      name
+      price
+      unit
+      quantity
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateBillingItem = /* GraphQL */ `
+  subscription OnUpdateBillingItem {
+    onUpdateBillingItem {
+      id
+      customerId
+      name
+      price
+      unit
+      quantity
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteBillingItem = /* GraphQL */ `
+  subscription OnDeleteBillingItem {
+    onDeleteBillingItem {
+      id
+      customerId
+      name
+      price
+      unit
+      quantity
+      createdAt
+      updatedAt
+    }
+  }
 `;
