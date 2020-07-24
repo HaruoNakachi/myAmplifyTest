@@ -69,7 +69,7 @@ export default {
         'From: ビズアプリ製作所 仲地 <haruo.nakachi@biz-app.biz>',
         'To: <' + this.customer.to + '>'
       ]
-      if (this.customer.cc == null || this.customer.cc.trim() == "") {
+      if (this.customer.cc != null && this.customer.cc.trim() != "") {
         messageParts = messageParts.concat(
           [
             'Cc: <' + this.customer.cc + '>'
@@ -91,11 +91,11 @@ export default {
         '<div>□■──────────────────────────■□</div>',
         '<div>　　ビズアプリ製作所</div>',
         '<div>　　仲地 春雄 / Nakachi Haruo</div>',
-        '<div>　　〒107-0062</div>',
-        '<div>　　東京都港区南青山3-10-41</div>',
-        '<div>　　ジュエル青山ビル202号（郵送のみ）</div>',
+        '<div>　　〒161-0033</div>',
+        '<div>　　東京都新宿区下落合2－5－3</div>',
+        '<div>　　千成ビル203</div>',
         '<div>　　Email: haruo.nakachi@biz-app.biz</div>',
-        '<div>　　URL:  http://biz-app.biz</div>',
+        '<div>　　URL:  https://biz-app.biz</div>',
         '<div>□■──────────────────────────■□</div>',
         '<div><br></div>',
       ].join('\n');

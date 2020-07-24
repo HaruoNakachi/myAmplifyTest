@@ -15,11 +15,11 @@ Vue.config.productionTip = false
 
 const apiConfig = {
   // devs
-  // apiKey: "AIzaSyA_dt24x3ReUF2jlrdMbNNlwgco6S0nrXo",
-  // clientId: "643015492832-rk2jnn4f8rn3dfpckl770r1a55lh9ojl.apps.googleusercontent.com",
-  // stg
   apiKey: "AIzaSyA_dt24x3ReUF2jlrdMbNNlwgco6S0nrXo",
-  clientId: "643015492832-o1r06neifpkc6hv2bt208cv6nhlf8388.apps.googleusercontent.com",
+  clientId: "643015492832-rk2jnn4f8rn3dfpckl770r1a55lh9ojl.apps.googleusercontent.com",
+  // stg
+  // apiKey: "AIzaSyA_dt24x3ReUF2jlrdMbNNlwgco6S0nrXo",
+  // clientId: "643015492832-o1r06neifpkc6hv2bt208cv6nhlf8388.apps.googleusercontent.com",
   discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
   scope: "https://www.googleapis.com/auth/gmail.compose"
   // see all available scopes here: https://developers.google.com/identity/protocols/googlescopes'
