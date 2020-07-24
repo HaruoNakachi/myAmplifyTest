@@ -120,11 +120,11 @@ const builder = {
                 '\n',
                 { text: 'ビズアプリ製作所', fontSize: 10, bold: true },
                 '\n',
-                { text: '〒107-0062', fontSize: 10, bold: true },
+                { text: '〒161-0033', fontSize: 10, bold: true },
                 '\n',
-                { text: '東京都港区南青山3-10-41', fontSize: 10, bold: true },
+                { text: '東京都新宿区下落合2－5－3', fontSize: 10, bold: true },
                 '\n',
-                { text: 'ジュエル青山ビル202号(郵送のみ)', fontSize: 10, bold: true },
+                { text: '千成ビル203', fontSize: 10, bold: true },
               ]
             },
           ]
