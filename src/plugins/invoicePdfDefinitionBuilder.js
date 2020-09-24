@@ -34,7 +34,7 @@ const builder = {
 
     let nonTaxedPrice = 0
     billingItems.forEach((billingItem) => {
-      nonTaxedPrice += billingItem.price
+      nonTaxedPrice += billingItem.price * billingItem.quantity
     })
     const tax = nonTaxedPrice * (taxRate / 100)
     const totalAmount = nonTaxedPrice + tax
