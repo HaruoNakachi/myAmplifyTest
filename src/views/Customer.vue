@@ -21,8 +21,8 @@
     </div>
     <div class="button-row">
       <div><span>領収書関連</span></div>
-      <v-btn @click="genReciept">領収書PDF生成</v-btn>
-      <v-btn @click="createDraftMailWithReciept">領収書PDF付きドラフトメール作成</v-btn>
+      <v-btn @click="genReceiptPdf">領収書PDF生成</v-btn>
+      <v-btn @click="createDraftReceiptMail">領収書PDF付きドラフトメール作成</v-btn>
     </div>
 
   </div>
@@ -34,6 +34,7 @@ import { getCustomer } from '../graphql/queries';
 import CustomerForm from '@/components/CustomerForm.vue';
 import pdfMakeJa from "../plugins/pdfMakeJa";
 import invoicePdfDefinitionBuilder from '../plugins/invoicePdfDefinitionBuilder';
+import receiptPdfDefinitionBuilder from '../plugins/receiptPdfDefinitionBuilder';
 const Base64 = require('js-base64').Base64;
 const moment = require('moment');
 moment.locale('ja');
@@ -66,6 +67,10 @@ export default {
     },
     genPdf(){
       const docDefinition = invoicePdfDefinitionBuilder.build(this.customer, this.billingItems)
+      pdfMakeJa.createPdf(docDefinition).download()
+    },
+    genReceiptPdf(){
+      const docDefinition = receiptPdfDefinitionBuilder.build(this.customer, this.billingItems)
       pdfMakeJa.createPdf(docDefinition).download()
     },
     async createDraftMail(){
@@ -152,7 +157,93 @@ export default {
 
         return convertedContent;
       })
-    }
+    },
+    async createDraftReceiptMail(){
+      const nl = "\r\n";
+      const boundary = "__ctrlq_dot_org__";
+      const currentYear = currentDate.year()
+      const currentMonth = currentDate.month() + 1
+      let messageParts = [
+        "MIME-Version: 1.0",
+        'From: ビズアプリ製作所 仲地 <haruo.nakachi@biz-app.biz>',
+        'To: <' + this.customer.to + '>'
+      ]
+      if (this.customer.cc != null && this.customer.cc.trim() != "") {
+        messageParts = messageParts.concat(
+          [
+            'Cc: <' + this.customer.cc + '>'
+          ]
+        )
+      }
+      const mailContent = [
+        '<div>' + this.customer.companyName + '</div>',
+        '<div>' + this.customer.mailName + '様</div>',
+        '<div><br></div>',
+        '<div>いつもお世話になっております。ビズアプリ製作所の仲地です。</div>',
+        '<div><br></div>',
+        '<div>表題の件につきまして、</div>',
+        '<div>領収書を送付させて頂きます。</div>',
+        '<div><br></div>',
+        '<div>お手数をお掛けしますが、</div>',
+        '<div>ご確認をお願い致します。</div>',
+        '<div><br></div>',
+        '<div>□■──────────────────────────■□</div>',
+        '<div>　　ビズアプリ製作所</div>',
+        '<div>　　仲地 春雄 / Nakachi Haruo</div>',
+        '<div>　　〒161-0033</div>',
+        '<div>　　東京都新宿区下落合2－5－3</div>',
+        '<div>　　千成ビル203</div>',
+        '<div>　　Email: haruo.nakachi@biz-app.biz</div>',
+        '<div>　　URL:  https://biz-app.biz</div>',
+        '<div>□■──────────────────────────■□</div>',
+        '<div><br></div>',
+      ].join('\n');
+
+      const docDefinition = receiptPdfDefinitionBuilder.build(this.customer, this.billingItems)
+      pdfMakeJa.createPdf(docDefinition).getBase64((convertedContent) => {
+        console.log('PDF GENERATED')
+
+        messageParts = messageParts.concat([
+          'Subject: =?UTF-8?B?' + Base64.encodeURI('【ビズアプリ製作所】領書（' + currentYear + '年' + currentMonth + '月度）') + '?=',
+          "Content-Type: multipart/alternate; boundary=" + boundary + nl,
+
+          "--" + boundary,
+          "Content-Type: text/html; charset=UTF-8",
+          "Content-Transfer-Encoding: base64" ,
+          mailContent + nl,
+
+          "--" + boundary,
+          "Content-Type: application/pdf; name=" + this.customer.companyName + "様_領収書_" + currentDate.format("YYYY_MD") + '.pdf',
+          "Content-Disposition: attachment; filename=" + this.customer.companyName + "様_領収書_" + currentDate.format("YYYY_MD") + '.pdf',
+          "Content-Transfer-Encoding: base64" + nl,
+          convertedContent + nl,
+
+          "--" + boundary + "--" + nl,
+        ])
+        console.log(messageParts)
+
+        const message = messageParts.join('\n');
+
+        this.$gapi.getGapiClient()
+          .then(gapi => {
+            const request = gapi.client.gmail.users.drafts.create({
+              'userId': 'me',
+              'resource': {
+                'message': {
+                  'raw': Base64.encodeURI(message)
+                }
+              }
+            })
+            request.execute((response)=>{
+              console.log('DRAFT MAIL CREATED')
+              console.log(response)
+              alert('メールのタイトルは『領収書』の文字を入れて下さい。')
+            })
+          })
+
+        return convertedContent;
+      })
+    },
   },
   created(){
     this.getData()
