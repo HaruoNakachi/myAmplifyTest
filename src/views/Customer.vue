@@ -14,8 +14,17 @@
         </ul>
       </li>
     </ul>
-    <v-btn @click="genPdf">Generate Invoice PDF</v-btn>
-    <v-btn @click="createDraftMail">Create Draft Mail</v-btn>
+    <div class="button-row">
+      <div><span>請求書関連</span></div>
+      <v-btn @click="genPdf">請求書PDF生成</v-btn>
+      <v-btn @click="createDraftMail">請求書PDF付きドラフトメール生成</v-btn>
+    </div>
+    <div class="button-row">
+      <div><span>領収書関連</span></div>
+      <v-btn @click="genReciept">領収書PDF生成</v-btn>
+      <v-btn @click="createDraftMailWithReciept">領収書PDF付きドラフトメール作成</v-btn>
+    </div>
+
   </div>
 </template>
 
@@ -150,3 +159,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.button-row {
+  width: 80%;
+  max-width: 500px;
+  border: 1px solid #b1b1b1;
+  padding: 5px 0;
+  margin: 0 auto;
+}
+.button-row button {
+  margin: 5px;
+}
+</style>
