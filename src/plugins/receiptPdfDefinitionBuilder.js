@@ -20,12 +20,16 @@ const builder = {
 
     const issuedDate = currentDate.format("YYYY/M/D")
     const receiptNumber = 'R' + currentDate.format("YYYY-MM-") + customer.invoiceNumber
-    const companyName = customer.companyName
-    const postalCode = '〒' + customer.postalCode
-    const address1 = customer.address1
-    const address2 = customer.address2
-    const position = customer.position
-    const name = customer.recipient + '  様'
+    const companyName = customer.companyName + '御中'
+    // const postalCode = '〒' + customer.postalCode
+    // const address1 = customer.address1
+    // const address2 = customer.address2
+
+    // 領収書の宛先が必要な場合と不要な場合で分ける
+    const displayReceipterName = false
+    const position = displayReceipterName ? customer.position : ''
+    const name = displayReceipterName ? (customer.recipient + '  様') : ''
+
     // const billingDate = currentDate.format("YYYY/M/D")
     // const paymentDeadline = currentDate.endOf('month').format("YYYY/M/D")
     const taxRate = 10
@@ -96,14 +100,14 @@ const builder = {
               margin: [0, 10, 0, 0],
               width: 280,
               text: [
-                { text: companyName, fontSize: 11, bold: true },
+                { text: companyName, fontSize: 13, bold: true },
                 '\n',
-                { text: postalCode, fontSize: 11, bold: true },
-                '\n',
-                { text: address1, fontSize: 11, bold: true },
-                '\n',
-                { text: address2, fontSize: 11, bold: true },
-                '\n',
+                // { text: postalCode, fontSize: 11, bold: true },
+                // '\n',
+                // { text: address1, fontSize: 11, bold: true },
+                // '\n',
+                // { text: address2, fontSize: 11, bold: true },
+                // '\n',
                 { text: position, fontSize: 11, bold: true },
                 '\n',
                 { text: name, fontSize: 11, bold: true },
