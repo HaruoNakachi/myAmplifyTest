@@ -20,7 +20,8 @@ type Customer @model {
   billingItems: [BillingItem] @connection(keyName: "byCustomer", fields: ["id"])
 }
 
-type BillingItem @model
+type BillingItem
+  @model
   @key(name: "byCustomer", fields: ["customerId", "name"]) {
   id: ID!
   customerId: ID!

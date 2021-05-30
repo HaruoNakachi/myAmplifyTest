@@ -1,5 +1,5 @@
 {
-    "AppSyncApiName": "myproject",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": "false"
+  "AppSyncApiName": "myproject",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": "false"
 }
